@@ -16,6 +16,8 @@
   - [Introduccion](#introduccion)
   - [Objetivos](#objetivos)
   - [Actividades previas](#actividades-previas)
+  - [Pokedex](#pokedex)
+  - [Conecta 4](#conecta-4)
   - [Conclusiones](#conclusiones)
   - [Referencias](#referencias)
   - [Estructura del directorio](#estructura-del-directorio)
@@ -39,13 +41,21 @@ Para cuando se termine la práctica se espera que el alumno tenga:
 
 ## Actividades previas
 
+## Pokedex
+
+## Conecta 4
+
 ## Conclusiones
 
 (usar eql y no eq con los arrays por la instancia)
 
 ## Referencias
 
-[Guión de la práctica](https://ull-esit-inf-dsi-2122.github.io/prct04-arrays-tuples-enums/)
+[Guión de la práctica](https://ull-esit-inf-dsi-2122.github.io/prct05-objects-classes-interfaces/)
+
+[SOLID principle using TypeScript - Samuele Resca](https://samueleresca.net/solid-principles-using-typescript/)
+
+[Principios SOLID - Apuntes de la asignatura](https://ull-esit-inf-dsi-2122.github.io/typescript-theory/typescript-solid.html)
 
 ## Estructura del directorio
 
