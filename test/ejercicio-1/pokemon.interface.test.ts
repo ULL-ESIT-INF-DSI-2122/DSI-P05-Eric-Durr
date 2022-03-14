@@ -1,6 +1,6 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import { Pokemon } from '../../src/ejercicio-1/pokemon.interface'; // eslint-disable-line
+import { Pokemon } from '../../src/ejercicio-1/pokemon.interfaces'; // eslint-disable-line
 
 describe('Pokemon info is shaped through an interface', () => {
   const dummy: Pokemon = {

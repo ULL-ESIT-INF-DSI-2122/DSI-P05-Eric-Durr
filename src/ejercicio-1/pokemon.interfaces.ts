@@ -13,3 +13,7 @@ export interface Pokemon {
     spd: number,
   };
 }
+
+export interface PrintPokemon {
+  print(): void;
+}
