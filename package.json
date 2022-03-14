@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "tsc-watch --onSuccess \"node dist/\"",
+    "pokedex": "tsc-watch --onSuccess \"node dist/combat.js\"",
+    "connect-4": "tsc-watch --onSuccess \"node dist/connect4.js\"",
     "test": "mocha -r ts-node/register 'test/**/*.ts'",
     "test:watch": "mocha --watch",
     "build": "npm test && tsc",
