@@ -1,4 +1,4 @@
-type PokemonType = 'fire' | 'grass' | 'water' | 'electric';
+type PokemonType = 'fire' | 'grass' | 'water' | 'electric' | 'normal';
 
 type Measures = {
   weight: number,
