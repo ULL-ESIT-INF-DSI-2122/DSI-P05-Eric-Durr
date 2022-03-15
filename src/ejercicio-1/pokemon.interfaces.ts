@@ -1,19 +1,32 @@
-export type PokemonType = 'fire' | 'grass' | 'water' | 'electric';
-export interface Pokemon {
-  name: string;
-  measures: {
-    weight: number,
-    height: number,
-  };
-  type: PokemonType;
-  stats: {
-    hp: number,
-    atk: number,
-    def: number,
-    spd: number,
-  };
-}
+type PokemonType = 'fire' | 'grass' | 'water' | 'electric';
 
-export interface PrintPokemon {
+type Measures = {
+  weight: number,
+  height: number,
+};
+
+type Stats = {
+  hp: number,
+  atk: number,
+  def: number,
+  spd: number,
+};
+
+interface PokemonPrint {
   print(): void;
 }
+
+interface PokemonActions {
+  speak(): void;
+  attack(): void;
+  receiveDamage(): void;
+  effectiveness(): void;
+}
+
+export {
+  PokemonType,
+  Measures,
+  Stats,
+  PokemonPrint,
+  PokemonActions,
+};
