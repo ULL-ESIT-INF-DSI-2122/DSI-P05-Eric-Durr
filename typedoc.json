@@ -1,5 +1,6 @@
 {
   "entryPoints": [
+    "./src/ejercicio-PE103.ts",
     "./src/ejercicio-1/",
     "./src/ejercicio-2/"
   ],
