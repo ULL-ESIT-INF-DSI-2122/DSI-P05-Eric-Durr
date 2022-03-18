@@ -15,7 +15,7 @@ export class Pokemon {
     type: PokemonType,
     stats: Stats,
   ) {
-    this.name = name;
+    this.name = name.toLowerCase();
     this.shape = shape;
     this.type = type;
     this.stats = stats;
