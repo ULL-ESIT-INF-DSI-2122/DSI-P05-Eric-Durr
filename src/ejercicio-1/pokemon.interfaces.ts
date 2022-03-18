@@ -1,4 +1,6 @@
-type PokemonType = 'fire' | 'grass' | 'water' | 'electric' | 'normal';
+import { Pokemon } from './pokemon.class'; // eslint-disable-line
+
+type PokemonType = 'fire' | 'leaf' | 'water' | 'electric' | 'normal';
 
 type Measures = {
   weight: number,
@@ -17,10 +19,9 @@ interface PokemonPrint {
 }
 
 interface PokemonActions {
-  speak(): void;
-  attack(): void;
-  receiveDamage(): void;
-  effectiveness(): void;
+  speak?(): void;
+  attack(attacker: Pokemon): void;
+  effectiveness(attacker: Pokemon, receiver: Pokemon): 1 | 0.5 | 2 ;
 }
 
 export {

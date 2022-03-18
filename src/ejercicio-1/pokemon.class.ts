@@ -41,4 +41,8 @@ export class Pokemon {
       this.stats.spd,
     ];
   }
+
+  setHp(value: number): void {
+    this.stats.hp = value;
+  }
 }
