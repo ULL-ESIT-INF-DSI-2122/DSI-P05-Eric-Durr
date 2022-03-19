@@ -50,19 +50,24 @@ describe('Player from connect four is described by a class', () => {
     boardGame.print();
   });
 
-  // it('pablo inserts token in column 1 and is printed as expected', () => {
-  //   expect(boardGame.insertToken(1, pablo)).to.be.true;
-  //   boardGame.print();
-  // });
-
-  // it('pablo inserts various tokens in column 1 and is printed as expected', () => {
-  //   expect(boardGame.insertToken(1, pablo)).to.be.true;
-  //   expect(boardGame.insertToken(1, pablo)).to.be.true;
-  //   expect(boardGame.insertToken(1, pablo)).to.be.true;
-  //   boardGame.print();
-  // });
-  boardGame.insertToken(1, pablo);
-  boardGame.print();
-  boardGame.insertToken(1, pablo);
-  boardGame.print();
+  it('pablo inserts tokens untill fill column 1 and is printed as expected', () => {
+    expect(boardGame.insertToken(1, pablo)).to.be.true;
+    expect(boardGame.insertToken(1, pablo)).to.be.true;
+    expect(boardGame.insertToken(1, pablo)).to.be.true;
+    expect(boardGame.insertToken(1, pablo)).to.be.true;
+    expect(boardGame.insertToken(1, pablo)).to.be.true;
+    expect(boardGame.insertToken(1, pablo)).to.be.true;
+    expect(boardGame.insertToken(1, pablo)).to.be.false;
+    boardGame.print();
+  });
+  it('marta inserts tokens untill fill column 2 and is printed as expected', () => {
+    expect(boardGame.insertToken(2, marta)).to.be.true;
+    expect(boardGame.insertToken(2, marta)).to.be.true;
+    expect(boardGame.insertToken(2, marta)).to.be.true;
+    expect(boardGame.insertToken(2, marta)).to.be.true;
+    expect(boardGame.insertToken(2, marta)).to.be.true;
+    expect(boardGame.insertToken(2, marta)).to.be.true;
+    expect(boardGame.insertToken(2, marta)).to.be.false;
+    boardGame.print();
+  });
 });
