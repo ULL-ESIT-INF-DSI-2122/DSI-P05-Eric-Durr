@@ -16,7 +16,6 @@ describe('Combat between two pokemons', () => {
     },
   );
 
-
   const unknownFirst: Pokemon = new Pokemon(
     'rat',
     'electric',
@@ -138,7 +137,10 @@ describe('Combat between two pokemons', () => {
     expect(unknownSecond.getStats()[0]).to.be.eq(350);
   });
 
-  // it('start method simulates the combat between pikachu and charmander', () => {
-  //   expect('start' in combat).to.be.true;
-  // });
+  it('start method simulates the combat between pikachu and charmander, should return winer', () => {
+    expect(combat.start()).to.be.eq(charmander);
+  });
+  it('start method simulates the combat between two unknown pokemons, should return winer', () => {
+    expect(combaTwo.start()).to.be.eq(unknownFirst);
+  });
 });

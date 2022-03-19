@@ -87,6 +87,27 @@ export class Combat implements PokemonPrint, PokemonActions {
     return 1;
   }
 
-  // start(): void {
-  // }
+  start(): Pokemon {
+    let i: number = 1;
+    while (this.firstFighter.getStats()[0] > 0
+       && this.secondFighter.getStats()[0] > 0) {
+      console.log(`COMBAT ROUND: ${i}`);
+      console.log(`${this.firstFighter.getName()} attaks ${this.secondFighter.getName()}`);
+      if (this.firstFighter.getStats()[0] > 0
+      && this.secondFighter.getStats()[0] > 0) {
+        this.attack(this.secondFighter);
+      }
+      this.print();
+      console.log(`${this.secondFighter.getName()} attaks ${this.firstFighter.getName()}`);
+      if (this.firstFighter.getStats()[0] > 0
+      && this.secondFighter.getStats()[0] > 0) {
+        this.attack(this.firstFighter);
+      }
+      this.print();
+      i += 1;
+    }
+    return this.firstFighter.getStats()[0] <= 0
+      ? this.secondFighter
+      : this.firstFighter;
+  }
 }
