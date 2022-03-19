@@ -20,8 +20,16 @@ export class ConnectFourPlayer implements GameStatus {
   getTokens(): Token[] { return this.tokens; }
 
   isWinner(): boolean {
-    console.log(this.tokens.sort((a, b) => (a.i - b.i)));
-    return true;
+    const evaluate: Token[] = this.tokens.sort((a, b) => (a.i - b.i));
+    if (evaluate.length < 4) { return false; }
+    let status: boolean = true;
+    evaluate.forEach((el, pos) => {
+      if (pos < evaluate.length - 1) {
+        if ((evaluate[pos + 1].i - el.i) > 1) { status = false; }
+        if ((evaluate[pos + 1].j - el.j) > 1) { status = false; }
+      }
+    })
+    return status;
   }
 
   makeMove(position: Token): boolean {

@@ -34,17 +34,16 @@ describe('Player from connect four is described by a class', () => {
 
   it('Player should win when four tokens are row connected', () => {
     defaultPlayer = new ConnectFourPlayer();
-    expect(defaultPlayer.isWinner()).to.be.true;
+    expect(defaultPlayer.isWinner()).to.be.false;
     expect(defaultPlayer.makeMove({ i: 0, j: 0 })).to.be.true;
     expect(defaultPlayer.makeMove({ i: 0, j: 1 })).to.be.true;
     expect(defaultPlayer.makeMove({ i: 0, j: 2 })).to.be.true;
     expect(defaultPlayer.makeMove({ i: 0, j: 3 })).to.be.true;
     expect(defaultPlayer.isWinner()).to.be.true;
-
   });
   it('Player should win when four tokens are column connected', () => {
     defaultPlayer = new ConnectFourPlayer();
-    expect(defaultPlayer.isWinner()).to.be.true;
+    expect(defaultPlayer.isWinner()).to.be.false;
     expect(defaultPlayer.makeMove({ i: 0, j: 0 })).to.be.true;
     expect(defaultPlayer.makeMove({ i: 1, j: 0 })).to.be.true;
     expect(defaultPlayer.makeMove({ i: 2, j: 0 })).to.be.true;
@@ -53,16 +52,25 @@ describe('Player from connect four is described by a class', () => {
   });
   it('Player should win when four tokens are up diagonaly connected', () => {
     defaultPlayer = new ConnectFourPlayer();
-    expect(defaultPlayer.isWinner()).to.be.true;
+    expect(defaultPlayer.isWinner()).to.be.false;
     expect(defaultPlayer.makeMove({ i: 6, j: 0 })).to.be.true;
     expect(defaultPlayer.makeMove({ i: 5, j: 1 })).to.be.true;
     expect(defaultPlayer.makeMove({ i: 4, j: 2 })).to.be.true;
     expect(defaultPlayer.makeMove({ i: 3, j: 3 })).to.be.true;
     expect(defaultPlayer.isWinner()).to.be.true;
   });
+  it('Player wont win when tokens are unaligned', () => {
+    defaultPlayer = new ConnectFourPlayer();
+    expect(defaultPlayer.isWinner()).to.be.false;
+    expect(defaultPlayer.makeMove({ i: 6, j: 6 })).to.be.true;
+    expect(defaultPlayer.makeMove({ i: 1, j: 1 })).to.be.true;
+    expect(defaultPlayer.makeMove({ i: 4, j: 2 })).to.be.true;
+    expect(defaultPlayer.makeMove({ i: 3, j: 3 })).to.be.true;
+    expect(defaultPlayer.isWinner()).to.be.false;
+  });
   it('Player should win when four tokens are down diagonaly connected', () => {
     defaultPlayer = new ConnectFourPlayer();
-    expect(defaultPlayer.isWinner()).to.be.true;
+    expect(defaultPlayer.isWinner()).to.be.false;
     expect(defaultPlayer.makeMove({ i: 0, j: 0 })).to.be.true;
     expect(defaultPlayer.makeMove({ i: 1, j: 1 })).to.be.true;
     expect(defaultPlayer.makeMove({ i: 2, j: 2 })).to.be.true;
