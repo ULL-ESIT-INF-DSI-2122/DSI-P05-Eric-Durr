@@ -1,9 +1,12 @@
+import * as rl from 'readline-sync';
 import { ConnectFourPlayer } from "./connectFourPlayer.class";
 import { GameActions, GameStatus, PrintableGame } from "./game.interfaces"; // eslint-disable-line
 
 export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
   private playerA: ConnectFourPlayer;
+
   private playerB: ConnectFourPlayer;
+
   private slots: boolean[][];
 
   constructor(playerA: ConnectFourPlayer, playerB: ConnectFourPlayer,) {
@@ -16,11 +19,20 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
       [true, true, true, true, true, true],
       [true, true, true, true, true, true],
       [true, true, true, true, true, true],
-    ]
+    ];
   }
 
-  isTie(): boolean { return true; }
- 
+  isTie(): boolean {
+    let tie: boolean = true;
+    this.getBoard()
+      .forEach((row) => {
+        row.forEach((el) => {
+          tie = !el;
+        });
+      });
+    return tie;
+  }
+
   print(): void {
     console.log(
       `Game between [31m${this.playerA.getName()}[37m and [33m${this.playerB.getName()}[37m `
@@ -64,9 +76,38 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
     return true;
   }
 
-  runRound(): void { }
+  runRound(): void {
+  }
 
-  runGame(): void { }
+  runGame(): void {
+    while (!this.isTie()
+    && !this.playerA.isWinner()
+    && !this.playerB.isWinner()) {
+      if (!this.isTie()
+      && !this.playerA.isWinner()
+      && !this.playerB.isWinner()) {
+        let column: string = rl.question('player A column');
+        if ((+column >= 0) && (+column < 6)) {
+          this.insertToken(+column, this.playerA);
+          this.print();
+        }
+        column = rl.question('player B column');
+        if ((+column >= 0) && (+column < 6)) {
+          this.insertToken(+column, this.playerB);
+          this.print();
+        }
+      }
+    }
+    if (this.playerA.isWinner()) {
+      console.log(`Wins ${this.playerA.getName()}!!!!`);
+    }
+    if (this.playerB.isWinner()) {
+      console.log(`Wins ${this.playerB.getName()}!!!!`);
+    }
+    if (this.isTie()) {
+      console.log('There was a tie between the players ...');
+    }
+  }
 
   getBoard(): boolean[][] {
     return this.slots;

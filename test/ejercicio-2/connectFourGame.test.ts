@@ -17,26 +17,26 @@ describe('Player from connect four is described by a class', () => {
     expect(boardGame.getBoard().length).to.be.eq(6);
     expect(boardGame.getBoard()[0].length).to.be.eq(6);
   });
-  // it('Board columns are accesible', () => {
-  //   expect(boardGame.getColumn(0)).to.be.eql(
-  //     [true, true, true, true, true, true],
-  //   );
-  //   expect(boardGame.getColumn(1)).to.be.eql(
-  //     [true, true, true, true, true, true],
-  //   );
-  //   expect(boardGame.getColumn(2)).to.be.eql(
-  //     [true, true, true, true, true, true],
-  //   );
-  //   expect(boardGame.getColumn(3)).to.be.eql(
-  //     [true, true, true, true, true, true],
-  //   );
-  //   expect(boardGame.getColumn(4)).to.be.eql(
-  //     [true, true, true, true, true, true],
-  //   );
-  //   expect(boardGame.getColumn(5)).to.be.eql(
-  //     [true, true, true, true, true, true],
-  //   );
-  // });
+  it('Board columns are accesible', () => {
+    expect(boardGame.getColumn(0)).to.be.eql(
+      [true, true, true, true, true, true],
+    );
+    expect(boardGame.getColumn(1)).to.be.eql(
+      [true, true, true, true, true, true],
+    );
+    expect(boardGame.getColumn(2)).to.be.eql(
+      [true, true, true, true, true, true],
+    );
+    expect(boardGame.getColumn(3)).to.be.eql(
+      [true, true, true, true, true, true],
+    );
+    expect(boardGame.getColumn(4)).to.be.eql(
+      [true, true, true, true, true, true],
+    );
+    expect(boardGame.getColumn(5)).to.be.eql(
+      [true, true, true, true, true, true],
+    );
+  });
   it('Board implements tie status from GameStatus interface', () => {
     expect('isTie' in boardGame).to.be.true;
   });
