@@ -86,12 +86,16 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
       if (!this.isTie()
       && !this.playerA.isWinner()
       && !this.playerB.isWinner()) {
-        let column: string = rl.question('player A column');
+        const column: string = rl.question('player A column');
         if ((+column >= 0) && (+column < 6)) {
           this.insertToken(+column, this.playerA);
           this.print();
         }
-        column = rl.question('player B column');
+      }
+      if (!this.isTie()
+      && !this.playerA.isWinner()
+      && !this.playerB.isWinner()) {
+        const column: string = rl.question('player B column');
         if ((+column >= 0) && (+column < 6)) {
           this.insertToken(+column, this.playerB);
           this.print();
