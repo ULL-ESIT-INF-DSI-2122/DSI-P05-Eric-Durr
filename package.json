@@ -12,7 +12,7 @@
     "combat": "tsc-watch --onSuccess \"node dist/combat.js\"",
     "connect-4": "tsc-watch --onSuccess \"node dist/connect4.js\"",
     "test": "nyc mocha -r ts-node/register 'test/**/*.ts'",
-    "test:watch": "mocha --watch",
+    "test:watch": "nyc mocha --watch",
     "build": "npm test && tsc",
     "docs": " typedoc --options typedoc.json --name \"P05 - Objetos, clases e interfaces\" --includeVersion"
   },

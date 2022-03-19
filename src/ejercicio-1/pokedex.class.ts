@@ -9,10 +9,6 @@ export class PokeDex implements PokemonPrint {
     this.list = list;
   }
 
-  myList(): Pokemon[] {
-    return this.list;
-  }
-
   isEmpty(): boolean {
     return this.list.length === 0;
   }

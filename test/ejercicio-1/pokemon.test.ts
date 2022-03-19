@@ -5,8 +5,8 @@ import { Pokemon } from '../../src/ejercicio-1/pokemon.class'; // eslint-disable
 describe('Pokemon info is stored in a class', () => {
   const dummy: Pokemon = new Pokemon(
     '',
-    { height: 0, weight: 0 },
     'fire',
+    { height: 0, weight: 0 },
     {
       hp: 0,
       atk: 0,
@@ -14,6 +14,8 @@ describe('Pokemon info is stored in a class', () => {
       spd: 0,
     },
   );
+
+  const defaultPokemon: Pokemon = new Pokemon();
 
   it('Pokemon interface name should exist and be a string', () => {
     expect('name' in dummy).to.be.true;
@@ -36,5 +38,15 @@ describe('Pokemon info is stored in a class', () => {
     expect(typeof dummy.getStats()[1]).to.eq('number');
     expect(typeof dummy.getStats()[2]).to.eq('number');
     expect(typeof dummy.getStats()[3]).to.eq('number');
+  });
+
+  it('Default pokemon is as espected normal', () => {
+    expect(defaultPokemon.getName()).to.be.eq('');
+    expect(defaultPokemon.getShape()).to.be.eql([0, 0]);
+    expect(defaultPokemon.getType()).to.be.eq('normal');
+    expect(defaultPokemon.getStats()[0]).to.be.eq(0);
+    expect(defaultPokemon.getStats()[1]).to.be.eq(0);
+    expect(defaultPokemon.getStats()[2]).to.be.eq(0);
+    expect(defaultPokemon.getStats()[3]).to.be.eq(0);
   });
 });

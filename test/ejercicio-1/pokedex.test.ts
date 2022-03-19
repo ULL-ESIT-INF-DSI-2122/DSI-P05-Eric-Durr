@@ -7,8 +7,8 @@ describe('PokeDex object composition by default', () => {
   const EricsPokedex: PokeDex = new PokeDex();
   const pikkachu: Pokemon = new Pokemon(
     'pikkachu',
-    { height: 5, weight: 5 },
     'electric',
+    { height: 5, weight: 5 },
     {
       hp: 50,
       atk: 10,
@@ -18,8 +18,8 @@ describe('PokeDex object composition by default', () => {
   );
   const pikachu: Pokemon = new Pokemon(
     'pikachu',
-    { height: 5, weight: 5 },
     'electric',
+    { height: 5, weight: 5 },
     {
       hp: 50,
       atk: 10,
@@ -41,6 +41,9 @@ describe('PokeDex object composition by default', () => {
   });
   it('Pokemon can be added to the pokedex', () => {
     expect(EricsPokedex.addPokemon(pikachu)).to.be.true;
+  });
+  it('Same pokemon added to the pokedex should return false', () => {
+    expect(EricsPokedex.addPokemon(pikachu)).to.be.false;
   });
   it('Pokemons list of the pokedex should now not be empty', () => {
     expect(EricsPokedex.isEmpty()).to.be.false;

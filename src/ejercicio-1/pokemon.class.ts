@@ -10,10 +10,15 @@ export class Pokemon {
   protected stats: Stats;
 
   constructor(
-    name: string,
-    shape: Measures,
-    type: PokemonType,
-    stats: Stats,
+    name: string = '',
+    type: PokemonType = 'normal',
+    shape: Measures = { height: 0, weight: 0 },
+    stats: Stats = {
+      hp: 0,
+      atk: 0,
+      def: 0,
+      spd: 0,
+    },
   ) {
     this.name = name.toLowerCase();
     this.shape = shape;
