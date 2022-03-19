@@ -2,12 +2,12 @@ type Token = {i: number, j: number}
 
 interface GameActions {
   runRound?(): void,
-  startGame?(): void,
+  runGame?(): void,
 }
 
 interface GameStatus {
-  isWinner?(): void,
-  fault?(): boolean,
+  isWinner?(): boolean,
+  isTie?(): boolean,
 }
 
 interface PrintableGame {

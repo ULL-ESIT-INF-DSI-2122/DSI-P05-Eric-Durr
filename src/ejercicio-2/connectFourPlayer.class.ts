@@ -1,4 +1,4 @@
-import { Token, GameActions, GameStatus } from "./game.interfaces"; // eslint-disable-line
+import { Token, GameStatus } from "./game.interfaces"; // eslint-disable-line
 
 export class ConnectFourPlayer implements GameStatus {
   private name: string;
@@ -28,7 +28,7 @@ export class ConnectFourPlayer implements GameStatus {
         if ((evaluate[pos + 1].i - el.i) > 1) { status = false; }
         if ((evaluate[pos + 1].j - el.j) > 1) { status = false; }
       }
-    })
+    });
     return status;
   }
 
