@@ -30,6 +30,28 @@ const forbidenDownDiagonals: Token[] = [
   { i: 3, j: 0 },
 ];
 
+/**
+ * # Connect four player Class | Primary parent class
+ *
+ * ## Implements
+ *
+ * - GameStatus
+ *
+ * ## Features
+ *
+ * - name | String (stores player name)
+ * - color | String (stores player custom color)
+ * - tokens | Array of tokens (marks tokens positions in the board)
+ *
+ * ## Methods
+ *
+ * - getName(void) | Returns player name
+ * - getcolor(void) | Returns player color
+ * - getTokens(void) | Returns player array of played tokens
+ * - isWinner(void) | Returns true if player wins connecting four tokens
+ * - makeMove(position: Token) | stores new token in played tokens
+ */
+
 export class ConnectFourPlayer implements GameStatus {
   private name: string;
 

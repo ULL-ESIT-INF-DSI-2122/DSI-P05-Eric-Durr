@@ -77,7 +77,7 @@ P03/
 
 ## Comandos npm del repositorio
 
-- npm start  `inicia la ejecución del código de manera ininterrumpida`
+- npm connect-4  `inicia la ejecución del juego entre las personas indicadas en el programa`
 - npm test  `ejecuta los test unitarios`
 - npm run test:watch `inicia la ejecución de los test unitarios de manera ininterrumpida`
 - npm run build `ejecuta los test y traduce el código TypeScript a JavaScript`

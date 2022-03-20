@@ -7,9 +7,6 @@
     "doc": "docs"
   },
   "scripts": {
-    "modificacion": "tsc-watch --onSuccess \"node dist/ejercicio-PE103/ejercicio-PE103.js\"",
-    "pokedex": "tsc-watch --onSuccess \"node dist/ejercicio-1/pokedex.js\"",
-    "combat": "tsc-watch --onSuccess \"node dist/combat.js\"",
     "connect-4": "tsc-watch --onSuccess \"node dist//ejercicio-2/connectFour.js\"",
     "test": "nyc mocha -r ts-node/register 'test/**/*.ts'",
     "test:watch": "nyc mocha --watch",

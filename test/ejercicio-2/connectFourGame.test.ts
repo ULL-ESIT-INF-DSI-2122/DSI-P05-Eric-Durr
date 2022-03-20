@@ -15,7 +15,7 @@ describe('Player from connect four is described by a class', () => {
   it('Board is a 6 by 6 matrix', () => {
     expect('slots' in boardGame).to.be.true;
     expect(boardGame.getBoard().length).to.be.eq(6);
-    expect(boardGame.getBoard()[0].length).to.be.eq(6);
+    expect(boardGame.getBoard()[0].length).to.be.eq(7);
   });
   it('Board columns are accesible', () => {
     expect(boardGame.getColumn(0)).to.be.eql(
@@ -42,9 +42,6 @@ describe('Player from connect four is described by a class', () => {
   });
   it('Board implements PrintableGame interface', () => {
     expect('print' in boardGame).to.be.true;
-  });
-  it('Board implements GameActions interface', () => {
-    expect('runRound' in boardGame).to.be.true;
   });
   it('Board is printed as expected', () => {
     boardGame.print();

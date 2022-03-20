@@ -2,6 +2,25 @@ import * as rl from 'readline-sync';
 import { ConnectFourPlayer } from "./connectFourPlayer.class"; // eslint-disable-line
 import { GameActions, GameStatus, PrintableGame } from "./game.interfaces"; // eslint-disable-line
 
+/**
+ * # Connect four Game Class | Primary parent class
+ *
+ * ## Implements
+ *
+ * - GameStatus
+ * - GameActions
+ * - PrintableGame
+ *
+ * ## Features
+ *
+ * - playerA | ConnectFourPlayer object (stores token positions)
+ * - playerB | ConnectFourPlayer object (stores token positions)
+ * - slots | Array of booleans (marks played positions)
+ *
+ * ## Methods
+ * - runGame(void) | Starts a game between the two players
+ */
+
 export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
   private playerA: ConnectFourPlayer;
 
@@ -104,7 +123,6 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
         if ((+column > 0) && (+column <= 7)) {
           if (this.insertToken(+column, this.playerB)) {
             this.print();
-            
             if (this.isTie()
               || this.playerA.isWinner()
               || this.playerB.isWinner()) {
@@ -136,10 +154,6 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
     }
   }
 
-  getBoard(): boolean[][] {
-    return this.slots;
-  }
-
   getColumn(col: number): boolean[] {
     const column: boolean[] = [];
     for (let i: number = 0; i < 6; i += 1) {
@@ -151,4 +165,6 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
     }
     return column;
   }
+
+  getBoard(): boolean[][] { return this.slots; }
 }
