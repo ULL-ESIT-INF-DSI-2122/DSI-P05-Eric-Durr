@@ -16,8 +16,11 @@
   - [Introduccion](#introduccion)
   - [Objetivos](#objetivos)
   - [Actividades previas](#actividades-previas)
-  - [Pokedex](#pokedex)
-  - [Conecta 4](#conecta-4)
+  - [Clase Pokemon](#clase-pokemon)
+  - [Clase Pokedex](#clase-pokedex)
+  - [Clase Combate](#clase-combate)
+  - [Clase Jugador de Conecta cuatro](#clase-jugador-de-conecta-cuatro)
+  - [Clase Juego de Conecta cuatro](#clase-juego-de-conecta-cuatro)
   - [Conclusiones](#conclusiones)
   - [Referencias](#referencias)
   - [Estructura del directorio](#estructura-del-directorio)
@@ -27,23 +30,57 @@
 
 ## Introduccion
 
-La sección de introducción a TypeScript de la asignatura comienza con la práctica número 3, donde se hace una evaluación del uso del tipo de datos estáticos y de las funciones en este lenguaje. En este documento se pretende plasmar el proceso de desarrollo y aportar justificaciones en cuanto a las decisiones de diseño realizadas en el código.
+En este informe se recogen las decisiones de  diseño de las clases para los ejercicios 1 y 2 además de un pequeño apartado de tareas previas y unas conclusiones tras el desarrollo de ambos ejercicios.
 
 ## Objetivos
 
-El objetivo de esta práctica es familiarizar en la medida de lo posible el uso de TypeScript en el uso de sus tipos de datos en programas sencillos.
+El objetivo de esta práctica se centra en el correcto uso de los elementos de TypeScript para la programación orientada a objetos intentando hacer uso de los principios SOLID por medio de las clases e interfaces.
 
 Para cuando se termine la práctica se espera que el alumno tenga:
 
-- Los 10 ejercicios de programación propuestos
-- Un entorno que admita documentación mediante TypeDoc
-- Un banco de tests donde aplicar BDD a los ejercicios propuestos.
+- El ejercicio 1 y todas las clases implicadas
+- El ejercicio 2 y todas las clases implicadas
+- Los test de ambos ejercicios
+- La cobertura de código por medio de NYC
+- Un programa que ejecute el juego de **conecta cuatro**
+- La documentación generada con TypeDoc.
 
 ## Actividades previas
 
-## Pokedex
+Para las actividades previas, a demás de seleccionar la tarea y generar el repositorio en el Github Classroom, se ha configurado el entorno para revisar la cobertura de código.
 
-## Conecta 4
+Para aplicar esto solo hay que aplicar dos acciones:
+
+1. instalar el paquete de npm de nyc (`npm i --save-dev nyc`)
+2. modificar la ejecución de los test desde el fichero package.json para revisar la cobertura de código (notroduciendo el comando `nyc` antes de `mocha`)
+
+## Clase Pokemon
+
+Esta clase permite tener almacenados todos los datos relativos a un pokemon especificados en el guión de la práctica. Se usa principalmente para representar un Pokemon en las clases Combate y Pokedex y así recurrir a esta abstracción más fácilmente.
+
+No hay nada esencialmente reseñable en la lógica que constotuye esta clase, se usa como una estructura de datos.
+
+## Clase Pokedex
+
+En la clase Pokedex se implementan la interfaz *PokemonPrint* ya que esta tendrá su propia forma de mostrar los pokemon que en ella se registran. Por otro lado hace uso de la clase Pokemon para almacenar en un array instancias de esta clase, por defecto la Pokedex se inicializa vacía.
+
+Se introduce el método de estado *isEmpty()* ya que es importante revisarlo antes de extraer un Pokemon o a la hora de operar con un objeto de esta clase.
+
+El método *print()* itera por la lista de pokemons para imprimir, por medio de la lectura de un texto, la imagen del pokemon. Si no se encuentra la imagen del pokemon porque no existe o no se encuentra en la base de datos se muestra un signo de interrogación, tras esta imagen se muestran las estadísticas relevantes del Pokemon.
+
+Hacer uso de esta base de datos se ha tomado como una opción más amigable al usuario para poder identificar rápidamente los Pokemon que se encuentran en su Pokedex.
+
+El método *addPokemon(Pokemon)* recibe el pokemon a insertar. Antes de insertarlo comprueba que no se encuentre ya registrado y devuelve true si se completa con éxito la operación.
+
+El método *removePokemon(String)* recibe el nombre de un pokemon a eliminar de la Pokedex. Antes de insertarlo comprueba que se encuentre ya registrado y devuelve true si se completa con éxito la operación.
+
+## Clase Combate
+
+
+
+## Clase Jugador de Conecta cuatro
+
+## Clase Juego de Conecta cuatro
 
 ## Conclusiones
 
