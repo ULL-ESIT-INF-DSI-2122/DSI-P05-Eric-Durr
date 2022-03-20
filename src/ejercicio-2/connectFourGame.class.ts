@@ -13,24 +13,17 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
     this.playerA = playerA;
     this.playerB = playerB;
     this.slots = [
-      [true, true, true, true, true, true],
-      [true, true, true, true, true, true],
-      [true, true, true, true, true, true],
-      [true, true, true, true, true, true],
-      [true, true, true, true, true, true],
-      [true, true, true, true, true, true],
+      [true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true],
+      [true, true, true, true, true, true, true],
     ];
   }
 
   isTie(): boolean {
-    let tie: boolean = true;
-    this.getBoard()
-      .forEach((row) => {
-        row.forEach((el) => {
-          tie = !el;
-        });
-      });
-    return tie;
+    return this.playerA.getTokens().length + this.playerA.getTokens().length === 42;
   }
 
   print(): void {
@@ -38,8 +31,8 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
       `Game between [31m${this.playerA.getName()}[37m and [33m${this.playerB.getName()}[37m `
       + `| ${this.playerA.getTokens().length + this.playerB.getTokens().length } tokens inside`);
     let rowString: string = '';
-    rowString += '\n  1   2   3   4   5   6  \n';
-    rowString += '┌───┬───┬───┬───┬───┬───┐\n';
+    rowString += '\n  1   2   3   4   5   6   7  \n';
+    rowString += '┌───┬───┬───┬───┬───┬───┬───┐\n';
     this.slots.forEach((row, i) => {
       rowString += '│';
       row.forEach((col, j) => {
@@ -54,10 +47,10 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
       rowString += '\n';
 
       if (i !== 5) {
-        rowString += '├───┼───┼───┼───┼───┼───┤\n';
+        rowString += '├───┼───┼───┼───┼───┼───┼───┤\n';
       }
     });
-    rowString += '└───┴───┴───┴───┴───┴───┘\n';
+    rowString += '└───┴───┴───┴───┴───┴───┴───┘\n';
     console.log(rowString);
   }
 
@@ -83,23 +76,23 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
     while (!this.isTie()
     && !this.playerA.isWinner()
     && !this.playerB.isWinner()) {
-      if (!this.isTie()
-      && !this.playerA.isWinner()
-      && !this.playerB.isWinner()) {
-        const column: string = rl.question('player A column');
-        if ((+column >= 0) && (+column < 6)) {
-          this.insertToken(+column, this.playerA);
-          this.print();
-        }
+      let column: string = rl.question(`It's ${this.playerA.getName()}'s turn, insert a column: `);
+      if ((+column > 0) && (+column <= 7)) {
+        this.insertToken(+column, this.playerA);
+        this.print();
       }
-      if (!this.isTie()
-      && !this.playerA.isWinner()
-      && !this.playerB.isWinner()) {
-        const column: string = rl.question('player B column');
-        if ((+column >= 0) && (+column < 6)) {
-          this.insertToken(+column, this.playerB);
-          this.print();
-        }
+
+      if (this.isTie() || this.playerA.isWinner()) {
+        break;
+      }
+
+      column = rl.question(`It's ${this.playerB.getName()}'s turn, insert a column: `);
+      if ((+column > 0) && (+column <= 6)) {
+        this.insertToken(+column, this.playerB);
+        this.print();
+      }
+      if (this.isTie() || this.playerB.isWinner()) {
+        break;
       }
     }
     if (this.playerA.isWinner()) {
@@ -120,7 +113,7 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
   getColumn(col: number): boolean[] {
     const column: boolean[] = [];
     for (let i: number = 0; i < 6; i += 1) {
-      for (let j: number = 0; j < 6; j += 1) {
+      for (let j: number = 0; j < 7; j += 1) {
         if (j === col) {
           column.push(this.getBoard()[i][j]);
         }
