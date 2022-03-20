@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import { Token, GameStatus } from "./game.interfaces"; // eslint-disable-line
 
 const forbidenUpDiagonals: Token[] = [
@@ -30,7 +29,6 @@ const forbidenDownDiagonals: Token[] = [
   { i: 4, j: 1 },
   { i: 3, j: 0 },
 ];
-
 
 export class ConnectFourPlayer implements GameStatus {
   private name: string;

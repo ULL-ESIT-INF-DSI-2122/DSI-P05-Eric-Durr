@@ -76,21 +76,42 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
     while (!this.isTie()
     && !this.playerA.isWinner()
     && !this.playerB.isWinner()) {
-      let column: string = rl.question(`It's ${this.playerA.getName()}'s turn, insert a column: `);
-      if ((+column > 0) && (+column <= 7)) {
-        this.insertToken(+column, this.playerA);
-        this.print();
+      let ok: boolean = false;
+      let column: string = '';
+      while(!ok) {
+        column = rl.question(`It's ${this.playerA.getName()}'s turn, insert a column: `);
+        if ((+column > 0) && (+column <= 7)) {
+          if(this.insertToken(+column, this.playerA)) {
+            this.print();
+            ok = true;
+          } else {
+            console.log(`Column ${+column} is full, please choose another one ...`);
+          }
+        } else {
+          console.log(`Column ${+column} is out of boundries, please choose another one ...`)
+        }
       }
 
       if (this.isTie() || this.playerA.isWinner()) {
         break;
       }
 
-      column = rl.question(`It's ${this.playerB.getName()}'s turn, insert a column: `);
-      if ((+column > 0) && (+column <= 6)) {
-        this.insertToken(+column, this.playerB);
-        this.print();
+      ok = false;
+
+      while(!ok) {
+        column = rl.question(`It's ${this.playerB.getName()}'s turn, insert a column: `);
+        if ((+column > 0) && (+column <= 7)) {
+          if (this.insertToken(+column, this.playerB)) {
+            this.print();
+            ok = true;
+          } else {
+            console.log(`Column ${+column} is full, please choose another one ...`);
+          }
+        } else {
+          console.log(`Column ${+column} is out of boundries, please choose another one ...`)
+        }
       }
+
       if (this.isTie() || this.playerB.isWinner()) {
         break;
       }
@@ -115,7 +136,7 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
     for (let i: number = 0; i < 6; i += 1) {
       for (let j: number = 0; j < 7; j += 1) {
         if (j === col) {
-          column.push(this.getBoard()[i][j]);
+          column.push(this.slots[i][j]);
         }
       }
     }
