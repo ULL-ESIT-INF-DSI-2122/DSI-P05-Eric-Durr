@@ -2,7 +2,7 @@
 
 >Informe para la asignatura de Desarrollo de Sistemas Informáticos
 >
->>**Autor**: [Eric Dürr Sierra](alu0101027005@ull.edu.es) - **Última modificación**: 07/03/2022
+>>**Autor**: [Eric Dürr Sierra](alu0101027005@ull.edu.es) - **Última modificación**: 20/03/2022
 
 ***
 
@@ -164,9 +164,78 @@ El uso del filtrado simplifica en gran medida los condicionales que se evaluan e
 
 ## Clase Juego de Conecta cuatro
 
+La clase juego se ha planteado para ocupar la lógica de comprobar que existen dos jugadores (de la clase antes explicada), saber qué posiciones del tablero ya han sido ocupadas (por medio de un simple array de booleanos) y dar comienzo y proceder con el juego.
+
+Para saber tras cada jugada cómo se encuentra el tablero se hace uso del método *print()* implementado desde la inclusión de la interfaz PrintableGame, este dibuja por consola una cuadŕicula de 6x7 que se rellenan con las fichas de los jugadores cuando en estas hay una casilla ocupada, para ello se recorren todas las casillas del juego y si una coincide con una posición guardada por un jugador se imprime su ficha.
+
+En cada turno un jugador es capaz de seleccionar una columna en la que introducir una ficha, para ello se crea el método *insertToken()* lo que se hace en primera instancia es resolver si la columna está llena, un condicional revisa que no quedan posiciones en valor 'true' y devuelve 'false' como resultado de la inserción, en cualquier otro caso revisa la columna en la que se inserta la ficha de forma inversa y en la primera posición cuyo valor es 'true' (lo que implica que se puede insertar) marca ese hueco como completado y añade un movimiento al jugador que inserta la ficha en la posición registrada dentro del tablero.
+
+```TS
+insertToken(col: number, player: ConnectFourPlayer): boolean {
+  if (this.getColumn(col - 1).filter((el) => el).length === 0) { return false; }
+  let moved: boolean = false;
+  this.getColumn(col - 1)
+    .reverse()
+    .forEach((el, row) => {
+      if ((el === true) && (moved === false)) {
+        moved = true;
+        this.slots[5 - row][col - 1] = false;
+        player.makeMove({ i: 5 - row, j: col - 1 });
+      }
+    });
+  return true;
+}
+```
+
+Este último método se simplifica mucho gracias al método *getColumn()* que directamente abstrae una columna del array de arrays de booleanos que compone el tablero de juego. Este método devuelve un array que es compuesto recorriendo el tablero e insertando los valores cuya posición ***j*** coincide con el parámetro de la columna. Lo que permite reducir en gran medida la lógica del resto de métodos a la hora de evaluar las acciones y las condiciones del juego.
+
+```TS
+getColumn(col: number): boolean[] {
+  const column: boolean[] = [];
+  for (let i: number = 0; i < 6; i += 1) {
+    for (let j: number = 0; j < 7; j += 1) {
+      if (j === col) {
+        column.push(this.slots[i][j]);
+      }
+    }
+  }
+  return column;
+}
+```
+
+Esta clase implementa también la interfaz GameAction definiendo el método *runGame()*, el cual es el que contiene la lójica de ejecución del juego. Dentro de este se registra la columna elegida por los jugadores (primero el A y luego el B) por medio del teclado haciendo uso de la librería 'readline-sync'. Gracias a un bucle que termina cuando se cumple que la ficha es insertada se puede controlar que se introduce en una columna existente y que tiene huecos vacíos, por medio del valor devuelto por el métoro *insertToken()* que falla cuando la columna está llena. Tal y como se exige en el guión, cuando una ficha no se introduce se vuelve a solicitar al mismo jugador que la inserte correctamente. El bucle principal termina cuando uno de los jugadores gana o cuando se produce un empate porque todos los jugadores han gastado todas sus fichas.
+
+```TS
+···
+while (!ok) {
+  column = rl.question(`It's ${this.playerA.getName()}'s turn, insert a column: `);
+  if ((+column > 0) && (+column <= 7)) {
+    if (this.insertToken(+column, this.playerA)) {
+      this.print();
+      ok = true;
+      if (this.isTie() || this.playerA.isWinner()) {
+        break;
+      }
+    } else {
+      console.log(`Column ${+column} is full, please choose another one ...`);
+    }
+  } else {
+    console.log(`Column ${+column} is out of boundries, please choose another one ...`);
+  }
+}
+···
+```
+
+Este método se diseña como un menú iterativo clásico ya que es la mecánica más acorde a las normas del juego donde las fichas se introducen de manera secuencial alternando los jugadores.
+
 ## Conclusiones
 
-(usar eql y no eq con los arrays por la instancia)
+La importancia de crear interfaces que puedan ser utilizadas por distintas clases queda demostrada con ambos ejercicios y su funcionalidad se destaca a la hora de:
+
+1. Poder definir una lógica distinta dependiendo de la clase que lo implementa
+2. modularizar y segmentar mejor el código
+
+La inserción de datos por medio de la terminal puede complicarse mucho usando la librería nativa readline ya que esta puede presentar asincronía. La solución ha sido sustiruirla por 'readline-sync' que provee una solución más manejable y que puede emplearse dentro de bucles while y for.
 
 ## Referencias
 
