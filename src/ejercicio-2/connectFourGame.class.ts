@@ -1,5 +1,5 @@
 import * as rl from 'readline-sync';
-import { ConnectFourPlayer } from "./connectFourPlayer.class";
+import { ConnectFourPlayer } from "./connectFourPlayer.class"; // eslint-disable-line
 import { GameActions, GameStatus, PrintableGame } from "./game.interfaces"; // eslint-disable-line
 
 export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
@@ -9,7 +9,7 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
 
   private slots: boolean[][];
 
-  constructor(playerA: ConnectFourPlayer, playerB: ConnectFourPlayer,) {
+  constructor(playerA: ConnectFourPlayer, playerB: ConnectFourPlayer) {
     this.playerA = playerA;
     this.playerB = playerB;
     this.slots = [
@@ -29,7 +29,8 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
   print(): void {
     console.log(
       `Game between [31m${this.playerA.getName()}[37m and [33m${this.playerB.getName()}[37m `
-      + `| ${this.playerA.getTokens().length + this.playerB.getTokens().length } tokens inside`);
+      + `| ${this.playerA.getTokens().length + this.playerB.getTokens().length} tokens inside`,
+    );
     let rowString: string = '';
     rowString += '\n  1   2   3   4   5   6   7  \n';
     rowString += '┌───┬───┬───┬───┬───┬───┬───┐\n';
@@ -69,26 +70,23 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
     return true;
   }
 
-  runRound(): void {
-  }
-
   runGame(): void {
     while (!this.isTie()
     && !this.playerA.isWinner()
     && !this.playerB.isWinner()) {
       let ok: boolean = false;
       let column: string = '';
-      while(!ok) {
+      while (!ok) {
         column = rl.question(`It's ${this.playerA.getName()}'s turn, insert a column: `);
         if ((+column > 0) && (+column <= 7)) {
-          if(this.insertToken(+column, this.playerA)) {
+          if (this.insertToken(+column, this.playerA)) {
             this.print();
             ok = true;
           } else {
             console.log(`Column ${+column} is full, please choose another one ...`);
           }
         } else {
-          console.log(`Column ${+column} is out of boundries, please choose another one ...`)
+          console.log(`Column ${+column} is out of boundries, please choose another one ...`);
         }
       }
 
@@ -98,7 +96,7 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
 
       ok = false;
 
-      while(!ok) {
+      while (!ok) {
         column = rl.question(`It's ${this.playerB.getName()}'s turn, insert a column: `);
         if ((+column > 0) && (+column <= 7)) {
           if (this.insertToken(+column, this.playerB)) {
@@ -108,7 +106,7 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
             console.log(`Column ${+column} is full, please choose another one ...`);
           }
         } else {
-          console.log(`Column ${+column} is out of boundries, please choose another one ...`)
+          console.log(`Column ${+column} is out of boundries, please choose another one ...`);
         }
       }
 
