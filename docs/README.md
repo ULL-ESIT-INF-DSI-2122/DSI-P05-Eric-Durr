@@ -76,7 +76,11 @@ El método *removePokemon(String)* recibe el nombre de un pokemon a eliminar de 
 
 ## Clase Combate
 
+Esta clase también hace uso de la clase Pokemon para instanciar sus luchadores, tanto el A como el B. Por otro lado implementa las interfaces PokemonPrint y PokemonActions ya que imprimirá el estado actual del combate con los datos relevantes y la imagen del pokemon y será necesario definir las acciones que van a efectuar los Pokemon durante el combate.
 
+El método *attack()* se ha diseñado para que el Pokemon que sea atacado es el pasado por parámetro y así se construya un programa más legible "__atacar -> pokemon__". La selección de atacante y atacado se hace mediante operadores ternarios dentro del método y comparándo los luchadores con el objeto pasado por parámetro, de este modo se puede usar indistintamente este método. Tras la selección se establece el nuevo valor de Puntos de Vida (HP) con la fórmula aplicada en las anteriores prácticas. En esta fórmula interviene el método *effectiveness()* también extraído de la práctica 3
+
+El método *start()* pone a combatir a los pokemon del objeto hasta que uno alcanza los puntos de vida negativos o nulos. Se muestra tras cada ataque la ronda y el estado de los pokemon. Se devuelve el pokemon ganador como resultado del método. Esto último se fundamenta en el uso de la función para extraer directamente el ganador y poder emplearlo en un programa de combates.
 
 ## Clase Jugador de Conecta cuatro
 
