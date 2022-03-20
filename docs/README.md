@@ -66,7 +66,7 @@ En la clase Pokedex se implementan la interfaz *PokemonPrint* ya que esta tendr�
 
 Se introduce el método de estado *isEmpty()* ya que es importante revisarlo antes de extraer un Pokemon o a la hora de operar con un objeto de esta clase.
 
-El método *print()* itera por la lista de pokemons para imprimir, por medio de la lectura de un texto, la imagen del pokemon. Si no se encuentra la imagen del pokemon porque no existe o no se encuentra en la base de datos se muestra un signo de interrogación, tras esta imagen se muestran las estadísticas relevantes del Pokemon.
+El método *print()* itera por la lista de pokemons para imprimir, por medio de la lectura de un fichero de texto, la imagen del pokemon. Si no se encuentra la imagen del pokemon porque no existe o no se encuentra en la base de datos se muestra un signo de interrogación, tras esta imagen se muestran las estadísticas relevantes del Pokemon.
 
 Hacer uso de esta base de datos se ha tomado como una opción más amigable al usuario para poder identificar rápidamente los Pokemon que se encuentran en su Pokedex.
 
@@ -83,6 +83,84 @@ El método *attack()* se ha diseñado para que el Pokemon que sea atacado es el 
 El método *start()* pone a combatir a los pokemon del objeto hasta que uno alcanza los puntos de vida negativos o nulos. Se muestra tras cada ataque la ronda y el estado de los pokemon. Se devuelve el pokemon ganador como resultado del método. Esto último se fundamenta en el uso de la función para extraer directamente el ganador y poder emplearlo en un programa de combates.
 
 ## Clase Jugador de Conecta cuatro
+
+Para separar la lógica de comprobar las victorias y conservar las posiciones en el juego de conecta 4 se crea la clase jugador que, como en la vida real, es el que es consciente de si ha ganado o no y de dónde están sus fichas.
+
+Esta clase permite conocer el nombre del jugador, si se identifica por un color propio y la lista de tokens que ha jugado, es decir, todas las posiciones en las que ha colocado una ficha en el tablero.
+
+Para para insertar una ficha se llama al método *makeMove()* que registra una nueva posición de una ficha si no es que ya existe, en cuyo caso devuelve **false**. Se asume que la los valores de la posición de una ficha dependen del tablero ya wue el jugador no define estas propiedades.
+
+La mayor parte de la lógica de este ejercicio se concentra en el método de estado *isWinner()* que implementa la interfaz **GamesStatus**. Para comenzar se descartan todas las jugadas anteriores a la cuarta ficha evaluando la longitud del array de Tokens, ya que es absurdo evaluar si es un ganador antes de entonces.
+
+Se separan las condiciones de victoria en:
+
+- columnas
+- filas
+- diagonales ascendentes
+- diagonales descendentes
+
+La evaluación de las filas se aplica recorriendo el array de tokens ordenado en base a la coordenada ***i***, para cada elemento se comprueba que los siguientes 4  tokens tienen el mismo valor en ***i*** y que sus valores en ***j*** son los 4 valores consecutivos directamente superiores. Si ambas condiciones se cumplen el jugador gana.
+
+```TS
+.sort((a, b) => a.i - b.i)
+.forEach((el, pos) => {
+  if (pos < this.tokens.length - 3) {
+    if (((el.i) === this.tokens[pos + 1].i
+      && (el.i) === this.tokens[pos + 2].i
+      && (el.i) === this.tokens[pos + 3].i)
+      && ((Math.abs((el.j) - this.tokens[pos + 1].j) === 1)
+      && (Math.abs((el.j + 1) - this.tokens[pos + 2].j) === 1)
+      && (Math.abs((el.j + 2) - this.tokens[pos + 3].j) === 1))) {
+      status = true;
+    }
+  }
+});
+```
+
+Las columnas se evaluan de forma análoga, en este caso se mantienen las ***j*** y se evalua que las ***i*** sean consecutivas. En tal caso el jugador gana.
+
+```TS
+.sort((a, b) => a.j - b.j)
+.forEach((el, pos) => {
+  if (pos < this.tokens.length - 3) {
+    if (((el.j) === this.tokens[pos + 1].j
+      && (el.j) === this.tokens[pos + 2].j
+      && (el.j) === this.tokens[pos + 3].j)
+      && ((Math.abs((el.i) - this.tokens[pos + 1].i) === 1)
+      && (Math.abs((el.i + 1) - this.tokens[pos + 2].i) === 1)
+      && (Math.abs((el.i + 2) - this.tokens[pos + 3].i) === 1))) {
+      status = true;
+    }
+  }
+});
+```
+
+Para evaluar las diagonales ascendentes se filtran de entre los tokens aquellos que no pueden consituir una diagonal en este tablero, es decir las secciones que constituyen las esquinas superior isquierda e inferior derecha en las que no vcabe una diagonl ascendente de cuatro fichas. tras este filtrado se recorre todo el listado de tokens y se localizan las posibles diagonales ascendentes de cuatro fichas por medio de un contador. En caso de encontrar cuatro entre uno de los elementos de la lista filtrada el jugador gana.
+
+```TS
+.forEach((el) => {
+  let counter: number = 0;
+  this.tokens.forEach((token) => {
+    if ((token.i === (el.i)) && (token.j === (el.j))) {
+      counter += 1;
+    }
+    if ((token.i === (el.i - 1)) && (token.j === (el.j + 1))) {
+      counter += 1;
+    }
+    if ((token.i === (el.i - 2)) && (token.j === (el.j + 2))) {
+      counter += 1;
+    }
+    if ((token.i === (el.i - 3)) && (token.j === (el.j + 3))) {
+      counter += 1;
+    }
+  });
+  if (counter === 4) { status = true; }
+});
+```
+
+Las diagonales descendentes aplican el mismo proceso pero filtrando las esquinas superior derecha e inferior izquierda.
+
+El uso del filtrado simplifica en gran medida los condicionales que se evaluan en las diagonales y estructura un código más sencillo y legible que es concordante con el estilo de desarrollo funcional de TypeScript. En el caso de no usarlos habría que hacer dos bucles iterativos para cada grupo de diagonales que filtren las casillas en las que puede haber una diagonal de cuatro fichas y extiende mucho más el método.
 
 ## Clase Juego de Conecta cuatro
 
