@@ -82,6 +82,9 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
           if (this.insertToken(+column, this.playerA)) {
             this.print();
             ok = true;
+            if (this.isTie() || this.playerA.isWinner()) {
+              break;
+            }
           } else {
             console.log(`Column ${+column} is full, please choose another one ...`);
           }
@@ -101,6 +104,12 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
         if ((+column > 0) && (+column <= 7)) {
           if (this.insertToken(+column, this.playerB)) {
             this.print();
+            
+            if (this.isTie()
+              || this.playerA.isWinner()
+              || this.playerB.isWinner()) {
+              break;
+            }
             ok = true;
           } else {
             console.log(`Column ${+column} is full, please choose another one ...`);
@@ -110,7 +119,9 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
         }
       }
 
-      if (this.isTie() || this.playerB.isWinner()) {
+      if (this.isTie()
+        || this.playerA.isWinner()
+        || this.playerB.isWinner()) {
         break;
       }
     }
