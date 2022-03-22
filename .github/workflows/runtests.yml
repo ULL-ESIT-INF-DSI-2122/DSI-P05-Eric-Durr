@@ -1,4 +1,4 @@
-name: Deploy report
+name: Test and coverage
 on:
   push:
     branches:
