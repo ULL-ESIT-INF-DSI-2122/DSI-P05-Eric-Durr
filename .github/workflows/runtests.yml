@@ -1,0 +1,23 @@
+name: Deploy report
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test-and-cover:
+    runs-on: ubuntu-latest
+    concurrency: ci-${{ github.ref }}
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+      - name: installation 🏗
+        run: npm install
+      - name: test 🔬🧪
+        run: npm run test:coverage
+      - name: Coverage ☔
+        run: npm run get:coverage
+      - name: Coveralls ⭐
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
