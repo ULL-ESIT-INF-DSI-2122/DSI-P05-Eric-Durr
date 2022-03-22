@@ -1,7 +1,11 @@
-import { describe, it } from 'mocha';
+import sinon from 'sinon';
+import { describe, before, after} from 'mocha';
 import { expect } from 'chai';
 import { PokeDex } from '../../src/ejercicio-1/pokedex.class'; // eslint-disable-line
 import { Pokemon } from '../../src/ejercicio-1/pokemon.class'; // eslint-disable-line
+
+// this line avoids console logs from tests but allow to use them in the tests
+sinon.stub(console, 'log');
 
 describe('PokeDex object composition by default', () => {
   const EricsPokedex: PokeDex = new PokeDex();
@@ -49,7 +53,7 @@ describe('PokeDex object composition by default', () => {
     expect(EricsPokedex.isEmpty()).to.be.false;
   });
   it('Pokemon can be printed', () => {
-    // EricsPokedex.print();
+    EricsPokedex.print();
   });
   it('Pokemon can be removed from the pokedex', () => {
     expect(EricsPokedex.removePokemon('pikachu')).to.be.true;
