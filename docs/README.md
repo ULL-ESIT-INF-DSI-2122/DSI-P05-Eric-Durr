@@ -4,6 +4,8 @@
 >
 >>**Autor**: [Eric Dürr Sierra](alu0101027005@ull.edu.es) - **Última modificación**: 20/03/2022
 
+[![Coverage Status](https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2122/DSI-P05-Eric-Durr/badge.svg?branch=master)](https://coveralls.io/github/ULL-ESIT-INF-DSI-2122/DSI-P05-Eric-Durr?branch=master)
+
 ***
 
 ## [Enlace a la documentacion generada con TypeDoc](http://dsi-p05-code-docs.surge.sh)
