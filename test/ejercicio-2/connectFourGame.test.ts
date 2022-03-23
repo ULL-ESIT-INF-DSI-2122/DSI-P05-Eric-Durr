@@ -43,9 +43,6 @@ describe('Player from connect four is described by a class', () => {
   it('Board implements PrintableGame interface', () => {
     expect('print' in boardGame).to.be.true;
   });
-  it('Board is printed as expected', () => {
-    boardGame.print();
-  });
 
   it('pablo inserts tokens untill fill column 1 and is printed as expected', () => {
     expect(boardGame.insertToken(1, pablo)).to.be.true;
@@ -66,5 +63,44 @@ describe('Player from connect four is described by a class', () => {
     expect(boardGame.insertToken(2, marta)).to.be.true;
     expect(boardGame.insertToken(2, marta)).to.be.false;
     boardGame.print();
+  });
+  it('running game before tie runs as expected', ()=> {
+    boardGame.runGame();
+  });
+  it('when both players used all slots tie shoud be true', () => {
+    expect(boardGame.insertToken(3, pablo)).to.be.true;
+    expect(boardGame.insertToken(3, pablo)).to.be.true;
+    expect(boardGame.insertToken(3, pablo)).to.be.true;
+    expect(boardGame.insertToken(3, pablo)).to.be.true;
+    expect(boardGame.insertToken(3, pablo)).to.be.true;
+    expect(boardGame.insertToken(3, pablo)).to.be.true;
+    expect(boardGame.insertToken(4, pablo)).to.be.true;
+    expect(boardGame.insertToken(4, pablo)).to.be.true;
+    expect(boardGame.insertToken(4, pablo)).to.be.true;
+    expect(boardGame.insertToken(4, pablo)).to.be.true;
+    expect(boardGame.insertToken(4, pablo)).to.be.true;
+    expect(boardGame.insertToken(4, pablo)).to.be.true;
+    expect(boardGame.insertToken(5, pablo)).to.be.true;
+    expect(boardGame.insertToken(5, pablo)).to.be.true;
+    expect(boardGame.insertToken(5, pablo)).to.be.true;
+    expect(boardGame.insertToken(5, pablo)).to.be.true;
+    expect(boardGame.insertToken(5, pablo)).to.be.true;
+    expect(boardGame.insertToken(5, pablo)).to.be.true;
+    expect(boardGame.insertToken(6, pablo)).to.be.true;
+    expect(boardGame.insertToken(6, pablo)).to.be.true;
+    expect(boardGame.insertToken(6, pablo)).to.be.true;
+    expect(boardGame.insertToken(6, pablo)).to.be.true;
+    expect(boardGame.insertToken(6, pablo)).to.be.true;
+    expect(boardGame.insertToken(6, pablo)).to.be.true;
+    expect(boardGame.insertToken(7, pablo)).to.be.true;
+    expect(boardGame.insertToken(7, pablo)).to.be.true;
+    expect(boardGame.insertToken(7, pablo)).to.be.true;
+    expect(boardGame.insertToken(7, pablo)).to.be.true;
+    expect(boardGame.insertToken(7, pablo)).to.be.true;
+    expect(boardGame.insertToken(7, pablo)).to.be.true;
+    expect(boardGame.isTie()).to.be.true;
+  });
+  it('running game after tie ends instantly', ()=> {
+    boardGame.runGame();
   });
 });

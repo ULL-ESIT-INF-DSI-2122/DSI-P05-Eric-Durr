@@ -42,7 +42,7 @@ export class ConnectFourGame implements GameStatus, GameActions, PrintableGame {
   }
 
   isTie(): boolean {
-    return this.playerA.getTokens().length + this.playerA.getTokens().length === 42;
+    return this.playerA.getTokens().length + this.playerB.getTokens().length === 42;
   }
 
   print(): void {
