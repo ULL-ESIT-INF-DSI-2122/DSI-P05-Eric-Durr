@@ -8,8 +8,8 @@
   },
   "scripts": {
     "connect-4": "tsc-watch --onSuccess \"node dist//ejercicio-2/connectFour.js\"",
-    "test": "nyc mocha -r ts-node/register 'test/**/*.ts'",
-    "test:watch": "nyc mocha --watch",
+    "test": "mocha -r ts-node/register 'test/**/*.ts'",
+    "test:watch": "mocha --watch",
     "test:coverage": "nyc mocha -r ts-node/register 'test/**/*.ts'",
     "get:coverage": "nyc report --reporter=text-lcov",
     "build": "npm test && tsc",
