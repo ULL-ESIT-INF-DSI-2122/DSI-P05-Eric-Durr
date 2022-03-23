@@ -20,10 +20,10 @@ jobs:
       - name: Coverage ☔
         run: npm run get:coverage > coverage/lcov.info
       - name: Delete nyc output
-        run: rmdir -r .nyc_output
+        run: rm -r .nyc_output
       - name: Publish in Coveralls ⭐
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Delete coverage output
-        run: rmdir -r coverage
+        run: rm -r coverage
